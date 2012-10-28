@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -17,15 +19,14 @@ public class Webpage {
 	public Webpage(String url) throws IOException
 	{
 
-		String s = url;
-		Document doc = Jsoup.connect(s).get();
+		Document doc = Jsoup.connect(url).get();
 
 		LinkedList<String> linkList = new LinkedList<String>();
 
 		String txt = doc.text();
 		HashMap<String, Integer> hm = new HashMap<String, Integer>();
-		ValueComparator bv = new ValueComparator(hm);
-		words = new TreeMap<String, Integer>(bv);
+		ValueComparator vc = new ValueComparator(hm);
+		words = new TreeMap<String, Integer>(vc);
 
 		for(String ss : txt.split(" "))
 		{
@@ -73,6 +74,30 @@ public class Webpage {
 		words.putAll(hm);
 		System.out.println(words.toString());
 
+	}//end constructor
+
+}//end class
+
+
+
+/**
+ * Sort by highest to lowest word-count
+ * @author michael
+ * from StackOverflow
+ */
+class ValueComparator implements Comparator<String> {
+
+	Map<String, Integer> base;
+	public ValueComparator(Map<String, Integer> base) {
+		this.base = base;
 	}
 
+	// Note: this comparator imposes orderings that are inconsistent with equals.    
+	public int compare(String a, String b) {
+		if (base.get(a) >= base.get(b)) {
+			return -1;
+		} else {
+			return 1;
+		} // returning 0 would merge keys
+	}
 }
