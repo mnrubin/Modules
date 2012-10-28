@@ -122,3 +122,5 @@ class ValueComparator implements Comparator<String> {
         } else {
             return 1;
         } // returning 0 would merge keys
+    }
+}
