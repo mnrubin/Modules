@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 import org.jsoup.Jsoup;
@@ -23,26 +24,14 @@ public class Webpage {
 
 	public Webpage(String url) throws IOException
 	{
-
-		Document doc;
-		doc = Jsoup.connect(url).get();
-		String txt = doc.text();
-
 		HashMap<String, Integer> hm = new HashMap<String, Integer>();
 		ValueComparator vc = new ValueComparator(hm);
 		words = new TreeMap<String, Integer>(vc);
-
-		for(String word : txt.split(" "))
-		{
-			if(hm.containsKey(word))
-			{
-				hm.put(word, hm.get(word)+1);
-			}
-			else 
-			{
-				hm.put(word, 1);
-			}
-		}
+		
+		/* main link */
+		Document doc = Jsoup.connect(url).get();
+		String text = doc.text();
+		parseWebpage(text, hm);
 
 		/* sub links */
 		LinkedList<String> linkList = new LinkedList<String>();
@@ -55,18 +44,8 @@ public class Webpage {
 			Document innerDoc;
 			try {
 				innerDoc = Jsoup.connect(link).get();
-				String txt2 = innerDoc.text();
-				for(String word : txt2.split(" "))
-				{
-					if(hm.containsKey(word))
-					{
-						hm.put(word, hm.get(word)+1);
-					}
-					else 
-					{
-						hm.put(word, 1);
-					}
-				}
+				text = innerDoc.text();
+				parseWebpage(text, hm);
 			} catch (IOException e) {
 				//e.printStackTrace();
 			}
@@ -81,11 +60,51 @@ public class Webpage {
 	{
 		return this.words.toString();
 	}
-	
+
 	public TreeMap<String, Integer> getWords()
 	{
 		return this.words;
 	}
+
+
+	/**
+	 * Filters and puts words in HashMap hm, to later be put in TreeMap words
+	 * @param txt
+	 */
+	private void parseWebpage(String text, HashMap<String, Integer> hm)
+	{
+		/* take only letters and spaces */
+		String s = text;
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < s.length(); i++) 
+		{
+			Character ch = s.charAt(i);
+			if(Character.isSpaceChar(ch) || ((ch>=65)&&(ch<=90)) || ((ch>=97)&&(ch<=122))) 
+			{
+				sb = sb.append(Character.toLowerCase(s.charAt(i)));
+			}
+		}
+		String txt = sb.toString();
+
+		/* split  and place trimmed words in hashmap */
+		StringTokenizer st = new StringTokenizer(txt, " ", false);
+		while(st.hasMoreTokens())
+		{
+			String word = st.nextToken().trim();
+			if(!Character.isSpaceChar(word.charAt(0)) && word.length() > 0 && word.length() < 15)
+			{
+				if(hm.containsKey(word))
+				{
+					hm.put(word, hm.get(word)+1);
+				}
+				else 
+				{
+					hm.put(word, 1);
+				}
+			}
+		}
+	}
+
 
 }//end class
 
