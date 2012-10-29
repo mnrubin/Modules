@@ -81,6 +81,11 @@ public class Webpage {
 	{
 		return this.words.toString();
 	}
+	
+	public TreeMap<String, Integer> getWords()
+	{
+		return this.words;
+	}
 
 }//end class
 
