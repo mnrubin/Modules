@@ -54,7 +54,13 @@ public class ModulesTester {
 		Set<String> matchingKeys = new HashSet<String>(toIntersect.getFirst());  //Set of intersecting words. length is # of words in all docs
 		for(int i = 1; i < toIntersect.size(); i++)
 		{
-			matchingKeys.retainAll(toIntersect.get(i));
+			try {
+				matchingKeys.retainAll(toIntersect.get(i));
+			}
+			catch(Exception e) {
+				System.out.println("retainAll returned null pointer");
+				e.printStackTrace();
+			}
 		}
 		//LinkedList<Integer> wordTotal = new LinkedList<Integer>();//number of times intersecting words appear in total. length is # of words in all webpages
 		//Now you can use these keys to iterate the sets 
@@ -83,10 +89,10 @@ public class ModulesTester {
 			// Create file 
 			FileWriter fstream = new FileWriter("out.txt");
 			BufferedWriter out = new BufferedWriter(fstream);
-			for(Webpage w : webpages)
-			{
-				out.write(w.toString());
-			}
+			//for(Webpage w : webpages)
+			//{
+				out.write(intersection.toString());
+			//}
 			//Close the output stream
 			out.close();
 		}catch (Exception e){//Catch exception if any
