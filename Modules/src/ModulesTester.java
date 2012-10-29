@@ -1,5 +1,7 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -30,26 +32,34 @@ public class ModulesTester {
 			while(sc.hasNextLine() == true)
 			{
 				try{
-				Webpage w = new Webpage(sc.nextLine()); 
-				webpages.add(w);
+					Webpage w = new Webpage(sc.nextLine()); 
+					webpages.add(w);
 				} catch (Exception e) {
-					
+
 				}
 			}
 		} 
 		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+
+
+		/* output to file*/
+		try{
+			// Create file 
+			FileWriter fstream = new FileWriter("out.txt");
+			BufferedWriter out = new BufferedWriter(fstream);
+			for(Webpage w : webpages)
+			{
+				out.write(w.toString());
+			}
+			//Close the output stream
+			out.close();
+		}catch (Exception e){//Catch exception if any
+			System.err.println("Error: " + e.getMessage());
 		}
 
-		for(Webpage w : webpages)
-		{
-			System.out.println(w);
-		}
 
 	} //end main
 

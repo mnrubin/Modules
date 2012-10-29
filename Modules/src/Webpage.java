@@ -45,7 +45,6 @@ public class Webpage {
 		}
 
 		/* sub links */
-
 		LinkedList<String> linkList = new LinkedList<String>();
 		Elements links = doc.select("a[href]");
 		for (Element link : links) {
