@@ -51,7 +51,7 @@ public class ModulesTester {
 		{
 			toIntersect.add(w.getWords().entrySet());
 		}
-		Set<String> matchingKeys = new HashSet<String>(toIntersect.getFirst());  //Set of intersecting words. length is # of words in all docs
+		HashSet<String> matchingKeys = new HashSet<String>(toIntersect.getFirst());  //Set of intersecting words. length is # of words in all docs
 		for(int i = 1; i < toIntersect.size(); i++)
 		{
 			try {
