@@ -12,6 +12,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
+/**
+ * A webpage, containing all the words on it and its sub-links
+ * @author michael
+ *
+ */
 public class Webpage {
 
 	TreeMap<String, Integer> words;
@@ -19,9 +24,10 @@ public class Webpage {
 	public Webpage(String url) throws IOException
 	{
 
-		Document doc = Jsoup.connect(url).get();
+		Document doc;
+		doc = Jsoup.connect(url).get();
 		String txt = doc.text();
-		
+
 		HashMap<String, Integer> hm = new HashMap<String, Integer>();
 		ValueComparator vc = new ValueComparator(hm);
 		words = new TreeMap<String, Integer>(vc);
@@ -47,19 +53,23 @@ public class Webpage {
 		}
 		for(String link : linkList)
 		{
-			Document innerDoc = Jsoup.connect(link).get();
-
-			String txt2 = innerDoc.text();
-			for(String word : txt2.split(" "))
-			{
-				if(hm.containsKey(word))
+			Document innerDoc;
+			try {
+				innerDoc = Jsoup.connect(link).get();
+				String txt2 = innerDoc.text();
+				for(String word : txt2.split(" "))
 				{
-					hm.put(word, hm.get(word)+1);
+					if(hm.containsKey(word))
+					{
+						hm.put(word, hm.get(word)+1);
+					}
+					else 
+					{
+						hm.put(word, 1);
+					}
 				}
-				else 
-				{
-					hm.put(word, 1);
-				}
+			} catch (IOException e) {
+				//e.printStackTrace();
 			}
 		}
 
@@ -72,7 +82,7 @@ public class Webpage {
 	{
 		return this.words.toString();
 	}
-	
+
 }//end class
 
 

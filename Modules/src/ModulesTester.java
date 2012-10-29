@@ -29,8 +29,12 @@ public class ModulesTester {
 
 			while(sc.hasNextLine() == true)
 			{
+				try{
 				Webpage w = new Webpage(sc.nextLine()); 
 				webpages.add(w);
+				} catch (Exception e) {
+					
+				}
 			}
 		} 
 		catch (FileNotFoundException e) {
@@ -42,7 +46,11 @@ public class ModulesTester {
 			e.printStackTrace();
 		}
 
-		
+		for(Webpage w : webpages)
+		{
+			System.out.println(w);
+		}
+
 	} //end main
 
 
