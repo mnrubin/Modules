@@ -65,7 +65,7 @@ public class ModulesTester {
 		//LinkedList<Integer> wordTotal = new LinkedList<Integer>();//number of times intersecting words appear in total. length is # of words in all webpages
 		//Now you can use these keys to iterate the sets 
 		HashMap<String, Integer> intersection = new HashMap<String, Integer>(); //hashmap of words in all webpages. 
-		for (String key : matchingKeys)  
+		for (String key : matchingKeys.toArray(new String[0]))  
 		{  
 			int[] tempResult = new int[toIntersect.size()]; //Number of times each word appears in each doc. length is # of webpages
 			for(int i = 0; i < toIntersect.size(); i++)
