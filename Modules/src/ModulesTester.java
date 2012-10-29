@@ -25,12 +25,12 @@ public class ModulesTester {
 	public static void main(String[] args) {
 
 		System.out.println("...");
-		File f = new File("cs.list");
+		File f = new File("partialcs.list");
 		Scanner sc;
 		LinkedList<Webpage> webpages = new LinkedList<Webpage>();
 		try {
 			sc = new Scanner(f);
-
+			/* for each url create a Webpage */
 			while(sc.hasNextLine() == true)
 			{
 				try{
@@ -82,7 +82,6 @@ public class ModulesTester {
 			
 			intersection.put(key, wordTotal);
 		}
-
 
 		/* output to file*/
 		try{

@@ -14,7 +14,7 @@ import org.jsoup.select.Elements;
 
 
 /**
- * A webpage, containing all the words on it and its sub-links
+ * A webpage, containing all the words (and their frequencies) on it and its sub-links
  * @author michael
  *
  */
@@ -22,6 +22,11 @@ public class Webpage {
 
 	TreeMap<String, Integer> words;
 
+	/**
+	 * Constructs a Webpage containing words and their frequencies for url and its sublinks
+	 * @param url of Unviersity webpage; Both url and links 1 level down are parsed
+	 * @throws IOException
+	 */
 	public Webpage(String url) throws IOException
 	{
 		HashMap<String, Integer> hm = new HashMap<String, Integer>();
@@ -51,6 +56,7 @@ public class Webpage {
 			}
 		}
 
+		/* put all words from all pages in sorted TreeMap words */
 		words.putAll(hm);
 		//System.out.println(words.toString());
 
@@ -66,10 +72,10 @@ public class Webpage {
 		return this.words;
 	}
 
-
 	/**
 	 * Filters and puts words in HashMap hm, to later be put in TreeMap words
-	 * @param txt
+	 * @param text of webpage
+	 * @param hm HashMap<String, Integer> all text is being stored in
 	 */
 	private void parseWebpage(String text, HashMap<String, Integer> hm)
 	{
