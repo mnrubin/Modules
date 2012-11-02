@@ -34,13 +34,14 @@ public class PhraseParserImpl implements PhraseParser {
 				map.put(s, map.get(s)+1);
 			else map.put(s, 1);
 		}
+		maps.add(map);
 	}
 	
 	public ArrayList<String> generatePhrases(int length){
 		ArrayList<String> result=new ArrayList<String>();
 		ArrayList<String> temp=new ArrayList<String>();
 		for(String s: des){
-			String[] array=s.split("\\.|,|\\. |, ");
+			String[] array=s.split("\\.|,");
 			for(String ss: array){
 				temp.add(ss.trim());
 			}
@@ -49,10 +50,11 @@ public class PhraseParserImpl implements PhraseParser {
 			String[] array=s.split(" ");
 			int index=0;
 			while(array.length-index>length){
-				String phrase="";
+				StringBuilder phrase=new StringBuilder();
 				for(int i=index; i<index+length; i++)
-					phrase+=array[i];
-				result.add(phrase);
+					phrase.append(array[i]+" ");
+				result.add(phrase.toString());
+				index++;
 			}
 		}
 		return result;
