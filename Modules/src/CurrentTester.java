@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import org.jsoup.Jsoup;
@@ -39,16 +40,20 @@ public class CurrentTester {
 		String url2 = "http://www.ucsd.edu/catalog/courses/"+department2+".html";
 		
 		Webpage w2 = new Webpage(url2);
+		PhraseParserImpl ppi = new PhraseParserImpl(w);
+		HashMap<String, Integer> phrasemap = ppi.getPhrase(2);
+		System.out.println(phrasemap);
+		FilterMaps.Filter_By_Opp_Url(phrasemap, w2);
+		System.out.println(phrasemap);
 		
-		
-		
+		/*
 		System.out.println(w);
 		System.out.println(w2);
 		
 		FileWriter fstream = new FileWriter("out.txt");
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write(w.toString()+" ");
-		out.write(w2.toString());
+		out.write(w2.toString());*/
 	}
 
 }
