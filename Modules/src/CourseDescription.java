@@ -14,4 +14,9 @@ public class CourseDescription {
 		return desc;
 	}
 	
+	public String toString()
+	{
+		return getDescription();
+	}
+	
 }
