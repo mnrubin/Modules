@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 public class PhraseParserImpl implements PhraseParser {
 
-	LinkedList<String> des;
-	ArrayList<HashMap<String, Integer>> maps;
+	private LinkedList<String> des;
+	private ArrayList<HashMap<String, Integer>> maps;
 	
 	public PhraseParserImpl(Webpage w){
 		des=new LinkedList<String>();
@@ -15,7 +15,6 @@ public class PhraseParserImpl implements PhraseParser {
 	}
 	
 	private void parse(Webpage w) {
-		// TODO Auto-generated method stub
 		LinkedList<CourseDescription> cdes=w.getCourseDescriptions();
 		for(CourseDescription c:cdes){
 			des.add(c.getDescription());
@@ -41,9 +40,9 @@ public class PhraseParserImpl implements PhraseParser {
 		ArrayList<String> result=new ArrayList<String>();
 		ArrayList<String> temp=new ArrayList<String>();
 		for(String s: des){
-			String[] array=s.split("\\.|,");
+			String[] array=s.split("\\.|,|;|:");
 			for(String ss: array){
-				temp.add(ss.trim());
+				temp.add(ss.trim().toLowerCase());
 			}
 		}
 		for(String s: temp){
@@ -62,6 +61,7 @@ public class PhraseParserImpl implements PhraseParser {
 	
 
 	@Override
+	
 	public HashMap<String, Integer> getPhrase(int length) {
 		// TODO Auto-generated method stub
 		return maps.get(length-1);
