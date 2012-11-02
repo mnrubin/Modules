@@ -27,14 +27,14 @@ public class ModulesTester {
 		System.out.println("...");
 		File f = new File("partialcs.list");
 		Scanner sc;
-		LinkedList<Webpage> webpages = new LinkedList<Webpage>();
+		LinkedList<WebpageOld> webpages = new LinkedList<WebpageOld>();
 		try {
 			sc = new Scanner(f);
 			/* for each url create a Webpage */
 			while(sc.hasNextLine() == true)
 			{
 				try{
-					Webpage w = new Webpage(sc.nextLine()); 
+					WebpageOld w = new WebpageOld(sc.nextLine()); 
 					webpages.add(w);
 				} catch (Exception e) {
 
@@ -47,7 +47,7 @@ public class ModulesTester {
 
 		/* find intersection of webpages */
 		LinkedList<Set> toIntersect = new LinkedList<Set>(); //Sets of words in webpages. length is # of webpages
-		for(Webpage w : webpages)
+		for(WebpageOld w : webpages)
 		{
 			toIntersect.add(w.getWords().entrySet());
 		}
