@@ -41,7 +41,7 @@ public class Webpage {
 		StringBuilder sb = new StringBuilder();
 		for(CourseDescription cd : descriptions)
 		{
-			sb.append(cd.getDescription() + ". ");
+			sb.append(cd.toString() + ". ");
 		}
 		return sb.toString();
 	}
