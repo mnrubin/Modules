@@ -8,6 +8,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
+/**
+ * @args[0] Website we are making modules for
+ * @args[1] Website for diff dept we are checking against
+ * 
+ * EXAMPLE:   CSE HIST
+ * 
+ * @author michael
+ *
+ */
 public class NewTester {
 
 	/**
@@ -17,20 +26,17 @@ public class NewTester {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
+		/* department we are making modules for */
 		String department = args[0];
 		String url = "http://www.ucsd.edu/catalog/courses/"+department+".html";
-		File f = new File("partialcs.list");
-		Document doc = Jsoup.connect(url).get();
 		
-		Elements courseDescriptions = doc.select(".course-descriptions");
-		Webpage w = new Webpage();
-		for(Element e : courseDescriptions)
-		{
-			CourseDescription cd = new CourseDescription(e.text());
-			//System.out.println(e.text());
-			w.addDescription(cd);
-		}
+		Webpage w = new Webpage(url);
 		
+		/* different department to check against */
+		String department2 = args[1];
+		String url2 = "http://www.ucsd.edu/catalog/courses/"+department2+".html";
+		
+		Webpage w2 = new Webpage(url2);
 		
 	}
 
