@@ -33,7 +33,7 @@ public class FilterMaps {
 			}
 		}
 	}
-	public static void Filter_By_Wiki(HashMap<String, Integer> phrases, String opp_url) {
+	public static void Filter_By_Wiki(HashMap<String, Integer> phrases) {
 		for (String key : phrases.keySet()) 
 		{
 			String[] words = key.split(" ");
