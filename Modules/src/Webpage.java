@@ -38,7 +38,7 @@ public class Webpage {
 	
 	public String toString()
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for(CourseDescription cd : descriptions)
 		{
 			sb.append(cd.getDescription() + ". ");

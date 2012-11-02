@@ -38,6 +38,10 @@ public class NewTester {
 		
 		Webpage w2 = new Webpage(url2);
 		
+		
+		
+		System.out.println(w);
+		System.out.println(w2);
 	}
 
 }
