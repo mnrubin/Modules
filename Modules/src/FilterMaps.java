@@ -14,7 +14,7 @@ public class FilterMaps {
 		String opp_subject = "HIST";
 		String opp_url = "http://www.ucsd.edu/catalog/courses/"+opp_subject+".html";
 		Filter_By_Opp_Url(phrases, opp_url);
-		Filter_By_Wiki(phrases, opp_url);
+		Filter_By_Wiki(phrases);
 	}
 	public static void Filter_By_Opp_Url(HashMap<String, Integer> phrases, String opp_url) {
 		Document opp_doc = null;
