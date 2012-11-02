@@ -13,7 +13,17 @@ public class FilterMaps {
 		phrases.put("Ediscover", 5);
 		String opp_subject = "HIST";
 		String opp_url = "http://www.ucsd.edu/catalog/courses/"+opp_subject+".html";
-		Document opp_doc = Jsoup.connect(opp_url).get();
+		Filter_By_Opp_Url(phrases, opp_url);
+		Filter_By_Wiki(phrases, opp_url);
+	}
+	public static void Filter_By_Opp_Url(HashMap<String, Integer> phrases, String opp_url) {
+		Document opp_doc = null;
+		try {
+			opp_doc = Jsoup.connect(opp_url).get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String doc_text = opp_doc.text();
 		for (String key : phrases.keySet()) 
 		{
@@ -21,6 +31,11 @@ public class FilterMaps {
 			{
 				phrases.remove(key);
 			}
+		}
+	}
+	public static void Filter_By_Wiki(HashMap<String, Integer> phrases, String opp_url) {
+		for (String key : phrases.keySet()) 
+		{
 			String[] words = key.split(" ");
 			String searchterm = "";
 			for (int i=0; i<words.length; ++i)
@@ -29,10 +44,17 @@ public class FilterMaps {
 				if (i < words.length - 1)
 					searchterm += "_";
 			}
-			Response wiki_response = Jsoup.connect("http://en.wikipedia.org/wiki/"+searchterm).ignoreHttpErrors(true).execute();
+			Response wiki_response = null;
+			try {
+				wiki_response = Jsoup.connect("http://en.wikipedia.org/wiki/"+searchterm).ignoreHttpErrors(true).execute();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (wiki_response.statusCode() == 404) {
 				phrases.remove(key);
 			}
 		}
 	}
+	
 }
