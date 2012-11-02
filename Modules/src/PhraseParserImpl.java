@@ -8,13 +8,13 @@ public class PhraseParserImpl implements PhraseParser {
 	LinkedList<String> des;
 	ArrayList<HashMap<String, Integer>> maps;
 	
-	public PhraseParserImpl(){
+	public PhraseParserImpl(Webpage w){
 		des=new LinkedList<String>();
 		maps=new ArrayList<HashMap<String, Integer>>();
+		parse(w);
 	}
 	
-	@Override
-	public void parse(Webpage w) {
+	private void parse(Webpage w) {
 		// TODO Auto-generated method stub
 		LinkedList<CourseDescription> cdes=w.getCourseDescriptions();
 		for(CourseDescription c:cdes){
@@ -26,7 +26,7 @@ public class PhraseParserImpl implements PhraseParser {
 		generateMap(4);
 	}
 	
-	public void generateMap(int length){
+	private void generateMap(int length){
 		HashMap<String,Integer> map=new HashMap<String, Integer>();
 		ArrayList<String> phrases=generatePhrases(length);
 		for(String s: phrases){
@@ -37,7 +37,7 @@ public class PhraseParserImpl implements PhraseParser {
 		maps.add(map);
 	}
 	
-	public ArrayList<String> generatePhrases(int length){
+	private ArrayList<String> generatePhrases(int length){
 		ArrayList<String> result=new ArrayList<String>();
 		ArrayList<String> temp=new ArrayList<String>();
 		for(String s: des){
