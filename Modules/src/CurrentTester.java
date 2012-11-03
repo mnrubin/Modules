@@ -41,7 +41,22 @@ public class CurrentTester {
 		String url2 = "http://www.ucsd.edu/catalog/courses/"+department2+".html";
 		
 		Webpage w2 = new Webpage(url2);
+		
 		PhraseParserImpl ppi = new PhraseParserImpl(w);
+		
+		/*String subject = "Computer Science";
+		String link_css = "html body div#wrapper div#content p span.courseFacLink a";
+		String base_url = "http://ucsd.edu/catalog/front/courses.html";
+		Document document = Jsoup.connect(url).get();
+		Elements elements = document.select(link_css);
+		
+		for (Element el : elements)
+		{
+			System.out.println(el.text());
+		}
+		System.out.println(elements.size());
+		*/
+		
 		ConcurrentHashMap<String, Integer> phrasemap = ppi.getPhrase(2);
 		System.out.println(phrasemap);
 		System.out.println(phrasemap.size());
