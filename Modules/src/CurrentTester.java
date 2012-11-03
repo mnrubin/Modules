@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -41,10 +42,16 @@ public class CurrentTester {
 		
 		Webpage w2 = new Webpage(url2);
 		PhraseParserImpl ppi = new PhraseParserImpl(w);
-		HashMap<String, Integer> phrasemap = ppi.getPhrase(2);
+		ConcurrentHashMap<String, Integer> phrasemap = ppi.getPhrase(2);
 		System.out.println(phrasemap);
+		System.out.println(phrasemap.size());
 		FilterMaps.Filter_By_Opp_Url(phrasemap, w2);
 		System.out.println(phrasemap);
+		System.out.println(phrasemap.size());
+		FilterMaps.Filter_By_Wiki(phrasemap);
+		System.out.println("");
+		System.out.println(phrasemap);
+		System.out.println(phrasemap.size());
 		
 		/*
 		System.out.println(w);
