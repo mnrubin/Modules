@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public interface PhraseParser {
 		/**
@@ -6,7 +7,7 @@ public interface PhraseParser {
 		 * @param length the length of phrases desired
 		 * @return a HaspMap, the key is the phrase and the value is the corresponding frequency .
 		 */
-		public HashMap<String, Integer> getPhrase(int length);
+		public ConcurrentHashMap<String, Integer> getPhrase(int length);
 		
 		/**
 		 * Currently not used.

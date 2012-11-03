@@ -1,16 +1,17 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class PhraseParserImpl implements PhraseParser {
 
 	private LinkedList<String> des;
-	private ArrayList<HashMap<String, Integer>> maps;
+	private ArrayList<ConcurrentHashMap<String, Integer>> maps;
 	
 	public PhraseParserImpl(Webpage w){
 		des=new LinkedList<String>();
-		maps=new ArrayList<HashMap<String, Integer>>();
+		maps=new ArrayList<ConcurrentHashMap<String, Integer>>();
 		parse(w);
 	}
 	
@@ -26,7 +27,7 @@ public class PhraseParserImpl implements PhraseParser {
 	}
 	
 	private void generateMap(int length){
-		HashMap<String,Integer> map=new HashMap<String, Integer>();
+		ConcurrentHashMap<String,Integer> map=new ConcurrentHashMap<String, Integer>();
 		ArrayList<String> phrases=generatePhrases(length);
 		for(String s: phrases){
 			if(map.containsKey(s))
@@ -62,7 +63,7 @@ public class PhraseParserImpl implements PhraseParser {
 
 	@Override
 	
-	public HashMap<String, Integer> getPhrase(int length) {
+	public ConcurrentHashMap<String, Integer> getPhrase(int length) {
 		// TODO Auto-generated method stub
 		return maps.get(length-1);
 	}
