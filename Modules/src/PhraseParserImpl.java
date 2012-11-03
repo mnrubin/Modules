@@ -41,7 +41,7 @@ public class PhraseParserImpl implements PhraseParser {
 		ArrayList<String> result=new ArrayList<String>();
 		ArrayList<String> temp=new ArrayList<String>();
 		for(String s: des){
-			String[] array=s.split("\\.|,|;|:");
+			String[] array=s.split("\\.|,|;|:|[0-9]+[^ ]*");
 			for(String ss: array){
 				temp.add(ss.trim().toLowerCase());
 			}
