@@ -27,8 +27,9 @@ public class CurrentTester {
 	/**
 	 * @param args
 	 * @throws IOException 
+	 * @throws WebsiteNotSupportedException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, WebsiteNotSupportedException {
 		// TODO Auto-generated method stub
 
 		/* department we are making modules for */
