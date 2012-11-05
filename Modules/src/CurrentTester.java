@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -60,9 +61,11 @@ public class CurrentTester {
 		ConcurrentHashMap<String, Integer> phrasemap = ppi.getPhrase(2);
 		System.out.println(phrasemap);
 		System.out.println(phrasemap.size());
-		FilterMaps.Filter_By_Opp_Url(phrasemap, w2);
-		System.out.println(phrasemap);
-		System.out.println(phrasemap.size());
+		testDict(phrasemap);
+		
+		//FilterMaps.Filter_By_Opp_Url(phrasemap, w2);
+		//System.out.println(phrasemap);
+		//System.out.println(phrasemap.size());
 		FilterMaps.Filter_By_Wiki(phrasemap);
 		System.out.println("");
 		System.out.println(phrasemap);
@@ -76,6 +79,18 @@ public class CurrentTester {
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write(w.toString()+" ");
 		out.write(w2.toString());*/
+	}
+	
+	public static void testDict(ConcurrentHashMap<String, Integer> map) throws IOException{
+		ReferenceDictCS rcs=new ReferenceDictCS("http://www.labautopedia.org/mw/index.php/List_of_programming_and_computer_science_terms");
+		HashSet<String> result=new HashSet<String>();
+		for(String s: map.keySet()){
+			if(rcs.containsKey(s))
+					result.add(s);
+		}
+		System.out.println("----------Using external dictionary:-------");
+		System.out.println(result);
+		System.out.println("---------END-----------");
 	}
 
 }
