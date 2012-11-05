@@ -14,36 +14,42 @@ import org.jsoup.select.Elements;
 public class Webpage {
 
 	private LinkedList<CourseDescription> descriptions;
-	
+
 	/**
 	 * Contructs a webpage by parsing and holding the course descriptions
 	 * @param url
 	 * @throws IOException
+	 * @throws WebsiteNotSupportedException 
 	 */
-	public Webpage(String url) throws IOException
+	public Webpage(String url) throws IOException, WebsiteNotSupportedException
 	{
 		descriptions = new LinkedList<CourseDescription>();
 		Document doc = Jsoup.connect(url).get();
-		Elements courseDescriptions = doc.select(".course-descriptions");
-		for(Element e : courseDescriptions)
+
+		if(url.contains("ucsd"))
 		{
-			CourseDescription cd = new CourseDescription(e.text());
-			//System.out.println(e.text());
-			addDescription(cd);
+			Elements courseDescriptions = doc.select(".course-descriptions");
+			for(Element e : courseDescriptions)
+			{
+				CourseDescription cd = new CourseDescription(e.text());
+				//System.out.println(e.text());
+				addDescription(cd);
+			}
 		}
-		
+		else throw new WebsiteNotSupportedException(url);
+
 	}
-	
+
 	private void addDescription(CourseDescription c)
 	{
 		descriptions.add(c);
 	}
-	
+
 	public LinkedList<CourseDescription> getCourseDescriptions()
 	{
 		return descriptions;
 	}
-	
+
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -53,5 +59,5 @@ public class Webpage {
 		}
 		return sb.toString();
 	}
-	
+
 }
