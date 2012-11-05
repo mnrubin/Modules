@@ -1,4 +1,8 @@
-
+/**
+ * COntains the text of a course description
+ * @author michael
+ *
+ */
 public class CourseDescription {
 
 	private String desc;

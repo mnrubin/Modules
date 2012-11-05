@@ -6,12 +6,20 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
+/**
+ * A webpage containing many course descriptions
+ * @author michael
+ *
+ */
 public class Webpage {
 
 	private LinkedList<CourseDescription> descriptions;
 	
-	
+	/**
+	 * Contructs a webpage by parsing and holding the course descriptions
+	 * @param url
+	 * @throws IOException
+	 */
 	public Webpage(String url) throws IOException
 	{
 		descriptions = new LinkedList<CourseDescription>();
