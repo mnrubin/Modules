@@ -26,13 +26,23 @@ public class Webpage {
 		descriptions = new LinkedList<CourseDescription>();
 		Document doc = Jsoup.connect(url).get();
 
-		if(url.contains("ucsd"))
+		if(url.indexOf("ucsd") != -1)
 		{
 			Elements courseDescriptions = doc.select(".course-descriptions");
 			for(Element e : courseDescriptions)
 			{
 				CourseDescription cd = new CourseDescription(e.text());
 				//System.out.println(e.text());
+				addDescription(cd);
+			}
+		}
+		else if(url.indexOf("berkeley") != -1)
+		{
+			Elements courseDescriptions = doc.select("html body table tbody tr td font p");
+			for(Element e : courseDescriptions)
+			{
+				CourseDescription cd = new CourseDescription(e.text());
+				System.out.println(e.text());
 				addDescription(cd);
 			}
 		}
