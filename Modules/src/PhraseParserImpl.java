@@ -14,7 +14,7 @@ public class PhraseParserImpl implements PhraseParser {
 		maps=new ArrayList<ConcurrentHashMap<String, Integer>>();
 		parse(w);
 	}
-	
+
 	private void parse(Webpage w) {
 		LinkedList<CourseDescription> cdes=w.getCourseDescriptions();
 		for(CourseDescription c:cdes){
@@ -67,11 +67,17 @@ public class PhraseParserImpl implements PhraseParser {
 		// TODO Auto-generated method stub
 		return maps.get(length-1);
 	}
+	
+	public ArrayList<ConcurrentHashMap<String, Integer>> getPhrase(){
+		return maps;
+	}
 
 	@Override
 	public String getDescription(String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }
