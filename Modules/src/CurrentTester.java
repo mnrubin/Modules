@@ -50,16 +50,17 @@ public class CurrentTester {
 		PhraseParserImpl ucsd_ppi = new PhraseParserImpl(ucsd_w);
 		PhraseParserImpl berk_ppi = new PhraseParserImpl(berk_w);
 		
-		ConcurrentHashMap<String, Integer> ucsd_map = ucsd_ppi.getPhrase(3);
-		ConcurrentHashMap<String, Integer> berk_map = berk_ppi.getPhrase(3);
+		ConcurrentHashMap<String, Integer> ucsd_map = ucsd_ppi.getPhrase(2);
+		ConcurrentHashMap<String, Integer> berk_map = berk_ppi.getPhrase(2);
 		
 		FilterMaps.Filter_By_Opp_Url(ucsd_map, ucsd_opp_w);
-		System.out.println(ucsd_map);
+		//System.out.println(ucsd_map);
 		FilterMaps.Filter_By_Opp_Url(berk_map, berk_opp_w);
-		System.out.println(berk_map);
+		//System.out.println(berk_map);
 		
 		ConcurrentHashMap<String, Integer> modules = deepclone(ucsd_map);
 		modules.keySet().retainAll(berk_map.keySet());
+		System.out.println(modules);
 		FilterMaps.Filter_By_Wiki(modules);
 		System.out.println(modules);
 		
