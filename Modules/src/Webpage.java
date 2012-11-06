@@ -42,7 +42,7 @@ public class Webpage {
 			for(Element e : courseDescriptions)
 			{
 				CourseDescription cd = new CourseDescription(e.text());
-				System.out.println(e.text());
+				//System.out.println(e.text());
 				addDescription(cd);
 			}
 		}

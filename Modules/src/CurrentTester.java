@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,33 +35,38 @@ public class CurrentTester {
 		// TODO Auto-generated method stub
 
 		/* department we are making modules for */
-		String subject = "Chemistry";
-		String url = get_Berkeley_listings(subject);
-		System.out.println(url);
-		
-		Webpage w = new Webpage(url);
-		
-		/* different department to check against */
+		String subject = "Computer Science";
 		String opp_subject = "History";
-		String url2 = get_UCSD_listings(opp_subject);
+		String berk_url = get_Berkeley_listings(subject);
+		String ucsd_url = get_UCSD_listings(subject);
+		String berk_opp_url = get_Berkeley_listings(opp_subject);
+		String ucsd_opp_url = get_UCSD_listings(opp_subject);		
 		
-		Webpage w2 = new Webpage(url2);
+		Webpage ucsd_w = new Webpage(ucsd_url);
+		Webpage berk_w = new Webpage(berk_url);
+		Webpage ucsd_opp_w = new Webpage(ucsd_opp_url);
+		Webpage berk_opp_w = new Webpage(berk_opp_url);
 		
-		PhraseParserImpl ppi = new PhraseParserImpl(w);
+		PhraseParserImpl ucsd_ppi = new PhraseParserImpl(ucsd_w);
+		PhraseParserImpl berk_ppi = new PhraseParserImpl(berk_w);
 		
+		ConcurrentHashMap<String, Integer> ucsd_map = ucsd_ppi.getPhrase(3);
+		ConcurrentHashMap<String, Integer> berk_map = berk_ppi.getPhrase(3);
 		
-		ConcurrentHashMap<String, Integer> phrasemap = ppi.getPhrase(2);
-		System.out.println(phrasemap);
-		System.out.println(phrasemap.size());
-		testDict(phrasemap);
+		FilterMaps.Filter_By_Opp_Url(ucsd_map, ucsd_opp_w);
+		System.out.println(ucsd_map);
+		FilterMaps.Filter_By_Opp_Url(berk_map, berk_opp_w);
+		System.out.println(berk_map);
+		
+		ConcurrentHashMap<String, Integer> modules = deepclone(ucsd_map);
+		modules.keySet().retainAll(berk_map.keySet());
+		FilterMaps.Filter_By_Wiki(modules);
+		System.out.println(modules);
 		
 		//FilterMaps.Filter_By_Opp_Url(phrasemap, w2);
 		//System.out.println(phrasemap);
 		//System.out.println(phrasemap.size());
-		FilterMaps.Filter_By_Wiki(phrasemap);
-		System.out.println("");
-		System.out.println(phrasemap);
-		System.out.println(phrasemap.size());
+		//FilterMaps.Filter_By_Wiki(phrasemap);
 		
 		/*
 		System.out.println(w);
@@ -69,6 +76,17 @@ public class CurrentTester {
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write(w.toString()+" ");
 		out.write(w2.toString());*/
+	}
+	public static ConcurrentHashMap<String, Integer> deepclone(ConcurrentHashMap<String, Integer> to_clone)
+	{
+		ConcurrentHashMap<String, Integer> Modules = new ConcurrentHashMap<String, Integer>();
+		for (Entry<String, Integer> e : to_clone.entrySet())
+		{
+			java.lang.String s = "" + e.getKey();
+			Modules.put(s, e.getValue());
+		}
+		return Modules;
+		
 	}
 	public static String get_UCSD_listings(String subject)
 	{
