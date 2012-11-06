@@ -33,31 +33,20 @@ public class CurrentTester {
 		// TODO Auto-generated method stub
 
 		/* department we are making modules for */
-		String department = args[0];
-		String url = "http://www.ucsd.edu/catalog/courses/"+department+".html";
+		String subject = "Chemistry";
+		String url = get_Berkeley_listings(subject);
+		System.out.println(url);
 		
 		Webpage w = new Webpage(url);
 		
 		/* different department to check against */
-		String department2 = args[1];
-		String url2 = "http://www.ucsd.edu/catalog/courses/"+department2+".html";
+		String opp_subject = "History";
+		String url2 = get_UCSD_listings(opp_subject);
 		
 		Webpage w2 = new Webpage(url2);
 		
 		PhraseParserImpl ppi = new PhraseParserImpl(w);
 		
-		/*String subject = "Computer Science";
-		String link_css = "html body div#wrapper div#content p span.courseFacLink a";
-		String base_url = "http://ucsd.edu/catalog/front/courses.html";
-		Document document = Jsoup.connect(url).get();
-		Elements elements = document.select(link_css);
-		
-		for (Element el : elements)
-		{
-			System.out.println(el.text());
-		}
-		System.out.println(elements.size());
-		*/
 		
 		ConcurrentHashMap<String, Integer> phrasemap = ppi.getPhrase(2);
 		System.out.println(phrasemap);
@@ -80,6 +69,60 @@ public class CurrentTester {
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write(w.toString()+" ");
 		out.write(w2.toString());*/
+	}
+	public static String get_UCSD_listings(String subject)
+	{
+		String link_css = "html body div#wrapper div#content p span.courseFacLink a";
+		String base_url = "http://ucsd.edu/catalog/front/courses.html";
+		Document document = null;
+		try {
+			document = Jsoup.connect(base_url).get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Elements elements = document.select(link_css);
+		String course_link = "";
+		if (subject.matches("Biology"))
+		{
+			course_link = "http://www.ucsd.edu/catalog/courses/BIOL.html";
+			return course_link;
+		}
+		for (Element el : elements)
+		{
+			if (el.attr("title").indexOf(subject) != -1 && el.text().indexOf("courses") == 0) {
+				course_link = "http://www.ucsd.edu/catalog/courses/" + el.attr("href").substring(11);
+				if (el.attr("title").length() == subject.length())
+					return course_link;
+			}
+		}
+		return course_link;
+	}
+	public static String get_Berkeley_listings(String subject)
+	{
+		String link_css = "html body center table tbody tr td p font a";
+		String base_url = "http://general-catalog.berkeley.edu/gc/curricula.html";
+		Document document = null;
+		try {
+			document = Jsoup.connect(base_url).get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String course_link = "";
+		Elements elements = document.select(link_css);
+		for (Element el : elements)
+		{
+			if (el.text().indexOf(subject) != -1) {
+				int index = el.attr("href").indexOf("=");
+				if (index != -1) {
+					course_link = "http://general-catalog.berkeley.edu/catalog/gcc_list_crse_req?p_dept_cd=" + el.attr("href").substring(index+1) + "&p_path=l";
+					if (el.text().length() == subject.length())
+						return course_link;
+				}
+			}
+		}
+		return course_link;
 	}
 	
 	public static void testDict(ConcurrentHashMap<String, Integer> map) throws IOException{
