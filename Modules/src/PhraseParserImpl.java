@@ -51,8 +51,12 @@ public class PhraseParserImpl implements PhraseParser {
 			int index=0;
 			while(array.length-index>length){
 				StringBuilder phrase=new StringBuilder();
-				for(int i=index; i<index+length; i++)
+				for(int i=index; i<index+length; i++){
+					if(array[i].trim().endsWith("s")){
+						array[i]=array[i].substring(0,array[i].length()-1);
+					}
 					phrase.append(array[i]+" ");
+				}
 				result.add(phrase.toString());
 				index++;
 			}
