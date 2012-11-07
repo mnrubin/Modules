@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class CurrentTester {
 		// TODO Auto-generated method stub
 
 		/* department we are making modules for */
-		String subject = "Computer Science";
+		String subject = "Mathematics";
 		String opp_subject = "History";
 		String berk_url = get_Berkeley_listings(subject);
 		String ucsd_url = get_UCSD_listings(subject);
@@ -50,33 +51,22 @@ public class CurrentTester {
 		PhraseParserImpl ucsd_ppi = new PhraseParserImpl(ucsd_w);
 		PhraseParserImpl berk_ppi = new PhraseParserImpl(berk_w);
 		
-		ConcurrentHashMap<String, Integer> ucsd_map = ucsd_ppi.getPhrase(2);
-		ConcurrentHashMap<String, Integer> berk_map = berk_ppi.getPhrase(2);
+		ArrayList<ConcurrentHashMap<String, Integer>> ucsd_maps = ucsd_ppi.getPhrase();
+		ArrayList<ConcurrentHashMap<String, Integer>> berk_maps = berk_ppi.getPhrase();
 		
-		FilterMaps.Filter_By_Opp_Url(ucsd_map, ucsd_opp_w);
-		//System.out.println(ucsd_map);
-		FilterMaps.Filter_By_Opp_Url(berk_map, berk_opp_w);
-		//System.out.println(berk_map);
-		
-		ConcurrentHashMap<String, Integer> modules = deepclone(ucsd_map);
-		modules.keySet().retainAll(berk_map.keySet());
-		System.out.println(modules);
-		FilterMaps.Filter_By_Wiki(modules);
-		System.out.println(modules);
-		
-		//FilterMaps.Filter_By_Opp_Url(phrasemap, w2);
-		//System.out.println(phrasemap);
-		//System.out.println(phrasemap.size());
-		//FilterMaps.Filter_By_Wiki(phrasemap);
-		
-		/*
-		System.out.println(w);
-		System.out.println(w2);
-		
-		FileWriter fstream = new FileWriter("out.txt");
-		BufferedWriter out = new BufferedWriter(fstream);
-		out.write(w.toString()+" ");
-		out.write(w2.toString());*/
+		for (int i=0; i<ucsd_maps.size(); ++i)
+		{
+			FilterMaps.Filter_By_Opp_Url(ucsd_maps.get(i), ucsd_opp_w);
+			FilterMaps.Filter_By_Opp_Url(berk_maps.get(i), berk_opp_w);
+			ConcurrentHashMap<String, Integer> modules = deepclone(ucsd_maps.get(i));
+			System.out.println(modules);
+			modules.keySet().retainAll(berk_maps.get(i).keySet());
+			System.out.println(modules);
+			FilterMaps.Filter_By_Wiki(modules);
+			System.out.println();
+			System.out.println(modules);
+		}
+
 	}
 	public static ConcurrentHashMap<String, Integer> deepclone(ConcurrentHashMap<String, Integer> to_clone)
 	{

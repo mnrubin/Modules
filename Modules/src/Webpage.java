@@ -29,7 +29,14 @@ public class Webpage {
 		if(url.indexOf("ucsd") != -1)
 		{
 			Elements courseDescriptions = doc.select(".course-descriptions");
+			Elements courseNames = doc.select(".course-name");
 			for(Element e : courseDescriptions)
+			{
+				CourseDescription cd = new CourseDescription(e.text());
+				//System.out.println(e.text());
+				addDescription(cd);
+			}
+			for(Element e : courseNames)
 			{
 				CourseDescription cd = new CourseDescription(e.text());
 				//System.out.println(e.text());
