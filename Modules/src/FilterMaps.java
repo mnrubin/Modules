@@ -69,6 +69,12 @@ public class FilterMaps {
 				phrases.remove(key);
 				key=key.trim()+"s";
 				phrases.put(key, tempVal);
+			}else if(status!=PAGE_NOT_FOUND && statusWithExtraS!=PAGE_NOT_FOUND)
+			{
+				int tempVal=phrases.get(key);
+				phrases.remove(key);
+				key=key.trim()+"s";
+				phrases.put(key, tempVal);
 			}
 		}
 	}
