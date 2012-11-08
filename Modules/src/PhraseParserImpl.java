@@ -49,7 +49,7 @@ public class PhraseParserImpl implements PhraseParser {
 		for(String s: temp){
 			String[] array=s.split(" ");
 			int index=0;
-			while(array.length-index>length){
+			while(array.length-index>=length){
 				StringBuilder phrase=new StringBuilder();
 				for(int i=index; i<index+length; i++){
 					if(array[i].trim().endsWith("s") && i == index+length-1 /*last word in phrase*/){
@@ -64,7 +64,17 @@ public class PhraseParserImpl implements PhraseParser {
 		return result;
 	}
 	
-
+	private static boolean find(ArrayList<ConcurrentHashMap<String, Integer>> maps, String s,int i){
+		boolean found=false;
+		for(int j=i+1;j<maps.size();j++){
+			for(String temp: maps.get(j).keySet()){
+				if(temp.indexOf(s)!=-1)
+					found=true;
+			}
+		}
+		return found;
+	}
+	
 	@Override
 	
 	public ConcurrentHashMap<String, Integer> getPhrases(int length) {
@@ -82,6 +92,13 @@ public class PhraseParserImpl implements PhraseParser {
 		return null;
 	}
 	
-	
+	public static void filterRepeated(ArrayList<ConcurrentHashMap<String, Integer>> maps){
+		for(int i=0;i<maps.size()-1;i++){
+			for(String s: maps.get(i).keySet()){
+				if(find(maps,s,i))
+					maps.get(i).remove(s);
+			}
+		}
+	}
 
 }

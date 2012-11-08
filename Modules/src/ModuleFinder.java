@@ -83,6 +83,7 @@ public class ModuleFinder {
 		if(filtered)
 			return;
 		filtered=true;
+		ArrayList<ConcurrentHashMap<String, Integer>> resultMap=new ArrayList<ConcurrentHashMap<String,Integer>>();
 		for (int i=0; i<ucsd_maps.size(); ++i)
 		{
 			//logger("UCB before filter: "+berk_maps.get(i));
@@ -105,7 +106,8 @@ public class ModuleFinder {
 			FilterMaps.Filter_By_Wiki(modules);
 			//System.out.println();
 			//System.out.println("Result: "+modules);
-			logger.log("Results: "+modules.toString());
+			//logger.log("Results: "+modules.toString());
+			resultMap.add(modules);
 			//System.out.println("\n\n\n");
 			PosTagger tagger = new PosTagger();
 			try {
@@ -114,6 +116,9 @@ public class ModuleFinder {
 				e.printStackTrace();
 			}
 		}
+		PhraseParserImpl.filterRepeated(resultMap);
+		for(ConcurrentHashMap<String,Integer> map:resultMap)
+			logger.log("Results: "+map.toString());
 	}
 
 	private String get_UCSD_listings(String subject)
