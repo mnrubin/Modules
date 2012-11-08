@@ -107,6 +107,12 @@ public class ModuleFinder {
 			//System.out.println("Result: "+modules);
 			logger.log("Results: "+modules.toString());
 			//System.out.println("\n\n\n");
+			PosTagger tagger = new PosTagger();
+			try {
+				tagger.FilterByPos(modules);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
