@@ -93,6 +93,14 @@ public class ModuleFinder {
 			ConcurrentHashMap<String, Integer> modules = Utilities.deepClone(ucsd_maps.get(i));
 			//System.out.println(modules);
 			modules.keySet().retainAll(berk_maps.get(i).keySet());
+			for(Map.Entry<String, Integer> e : modules.entrySet())
+			{
+				if(berk_maps.get(i).containsKey(e.getKey())) //should always be true
+				{
+					int newVal = e.getValue() + berk_maps.get(i).get(e.getKey());
+					modules.replace(e.getKey(), e.getValue(), newVal);
+				}
+			}
 			//System.out.println("Intersection: "+modules);
 			FilterMaps.Filter_By_Wiki(modules);
 			//System.out.println();

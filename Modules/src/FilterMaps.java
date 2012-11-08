@@ -15,13 +15,13 @@ public class FilterMaps {
 	public static final int PAGE_NOT_FOUND = 404;
 	
 	public static void main(String[] args) throws IOException {
-		HashMap<String, Integer> phrases = new HashMap<String, Integer>();
+		/*HashMap<String, Integer> phrases = new HashMap<String, Integer>();
 		phrases.put("Ediscover", 5);
 		String opp_subject = "HIST";
 		String opp_url = "http://www.ucsd.edu/catalog/courses/"+opp_subject+".html";
 		//Filter_By_Opp_Url(phrases, opp_url);
 		//Filter_By_Wiki(phrases);
-	}
+*/	}
 	public static void Filter_By_Opp_Url(ConcurrentHashMap<String, Integer> phrases, Webpage w2) {
 		for (String k : phrases.keySet()) 
 		{
