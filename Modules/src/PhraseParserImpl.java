@@ -67,7 +67,7 @@ public class PhraseParserImpl implements PhraseParser {
 
 	@Override
 	
-	public ConcurrentHashMap<String, Integer> getPhrase(int length) {
+	public ConcurrentHashMap<String, Integer> getPhrases(int length) {
 		// TODO Auto-generated method stub
 		return maps.get(length-1);
 	}
