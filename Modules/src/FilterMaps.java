@@ -65,10 +65,10 @@ public class FilterMaps {
 			if (status == PAGE_NOT_FOUND && statusWithExtraS==PAGE_NOT_FOUND) {
 				phrases.remove(key);
 			}else if(status==PAGE_NOT_FOUND && statusWithExtraS!=PAGE_NOT_FOUND){
-				int temp=phrases.get(key);
+				int tempVal=phrases.get(key);
 				phrases.remove(key);
-				key=key+"s";
-				phrases.put(key, temp);
+				key=key.trim()+"s";
+				phrases.put(key, tempVal);
 			}
 		}
 	}

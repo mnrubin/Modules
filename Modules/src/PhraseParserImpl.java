@@ -52,7 +52,7 @@ public class PhraseParserImpl implements PhraseParser {
 			while(array.length-index>length){
 				StringBuilder phrase=new StringBuilder();
 				for(int i=index; i<index+length; i++){
-					if(array[i].trim().endsWith("s")){
+					if(array[i].trim().endsWith("s") && i == index+length-1 /*last word in phrase*/){
 						array[i]=array[i].substring(0,array[i].length()-1);
 					}
 					phrase.append(array[i]+" ");
