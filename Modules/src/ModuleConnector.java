@@ -142,8 +142,9 @@ public class ModuleConnector {
 		StringBuilder sb = new StringBuilder();
 		try {
 			document = Jsoup.connect("http://en.wikipedia.org/wiki/"+temp).get();
+			//String doc_text = document.text();
 			//Elements content = document.select("html body table tbody tr td span p");
-			Element content = document.body();
+			String content = document.body().text();
 			sb.append(content.toString());
 			/*for(Element e : content)
 			{
@@ -159,7 +160,7 @@ public class ModuleConnector {
 
 	public static void main(String args[]) throws IOException
 	{
-		ModuleConnector mc = new ModuleConnector("Computer Science");
+		ModuleConnector mc = new ModuleConnector("Mathematics");
 	}
 
 }//end class

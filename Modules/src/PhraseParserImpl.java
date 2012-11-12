@@ -24,6 +24,7 @@ public class PhraseParserImpl implements PhraseParser {
 		generateMap(2);
 		generateMap(3);
 		generateMap(4);
+		generateMap(5);
 	}
 	
 	private void generateMap(int length){

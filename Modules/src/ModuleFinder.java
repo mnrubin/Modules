@@ -103,18 +103,19 @@ public class ModuleFinder {
 				}
 			}
 			//System.out.println("Intersection: "+modules);
-			FilterMaps.Filter_By_Wiki(modules);
-			//System.out.println();
-			//System.out.println("Result: "+modules);
-			//logger.log("Results: "+modules.toString());
-			resultMap.add(modules);
-			//System.out.println("\n\n\n");
 			PosTagger tagger = new PosTagger();
 			try {
 				tagger.FilterByPos(modules);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			FilterMaps.Filter_By_Wiki(modules);
+			//System.out.println();
+			//System.out.println("Result: "+modules);
+			//logger.log("Results: "+modules.toString());
+			resultMap.add(modules);
+			//System.out.println("\n\n\n");
+			
 		}
 		PhraseParserImpl.filterRepeated(resultMap);
 		for(ConcurrentHashMap<String,Integer> map:resultMap)
