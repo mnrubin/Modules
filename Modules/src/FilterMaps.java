@@ -13,6 +13,7 @@ import org.jsoup.nodes.Document;
 public class FilterMaps {
 	
 	public static final int PAGE_NOT_FOUND = 404;
+	public static final int HTTP_OKAY = 200;
 	
 	public static void main(String[] args) throws IOException {
 		/*HashMap<String, Integer> phrases = new HashMap<String, Integer>();
@@ -62,14 +63,14 @@ public class FilterMaps {
 			}
 			int status=wiki_response.statusCode();
 			int statusWithExtraS=wiki_responseWithExtraS.statusCode();
-			if (status == PAGE_NOT_FOUND && statusWithExtraS==PAGE_NOT_FOUND) {
+			if (status != HTTP_OKAY && statusWithExtraS != HTTP_OKAY) {
 				phrases.remove(key);
-			}else if(status==PAGE_NOT_FOUND && statusWithExtraS!=PAGE_NOT_FOUND){
+			}else if(status != HTTP_OKAY && statusWithExtraS == HTTP_OKAY){
 				int tempVal=phrases.get(key);
 				phrases.remove(key);
 				key=key.trim()+"s";
 				phrases.put(key, tempVal);
-			}else if(status!=PAGE_NOT_FOUND && statusWithExtraS!=PAGE_NOT_FOUND)
+			}else if(status == HTTP_OKAY && statusWithExtraS == HTTP_OKAY)
 			{
 				int tempVal=phrases.get(key);
 				phrases.remove(key);

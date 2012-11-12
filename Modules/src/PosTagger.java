@@ -18,12 +18,22 @@ public class PosTagger {
 	    POSTaggerME tagger = new POSTaggerME(model);
 	    
 	    for (String k: modules.keySet()) {
-		    if (k.trim().indexOf(" ") == -1) {
+		    if (k.trim().indexOf(" ") == -1) { //only takes 1 word phrases
 		
 		        String whitespaceTokenizerLine[] = WhitespaceTokenizer.INSTANCE.tokenize(k);
 		        String[] tags = tagger.tag(whitespaceTokenizerLine);
 		
 		        POSSample sample = new POSSample(whitespaceTokenizerLine, tags);
+		        int index = 0;
+		        for(String tag : sample.getTags())
+		        {
+		        	if(tag!="NNS" || tag!="NN" || tag!="NNP")
+		        	{
+		        		modules.remove(whitespaceTokenizerLine[index].trim());
+		        	}
+		        	index++;
+		        }
+		        	
 		        System.out.println(sample.toString());
 		
 		        //perfMon.incrementCounter();
