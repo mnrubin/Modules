@@ -1,4 +1,3 @@
-
 public class WebsiteNotSupportedException extends Exception {
 
 	public WebsiteNotSupportedException() { super(); }
