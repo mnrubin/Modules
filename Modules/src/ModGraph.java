@@ -5,7 +5,6 @@ import java.util.List;
 
 public class ModGraph {
 	List<Node> allNodes;
-	List<Edge> allEdges;
 	public ModGraph(LinkedList<Pair> list, ArrayList<String> nodes, int[][] result) {
 		for (Pair p:list) {
 			Node pre_node = null;
@@ -31,13 +30,6 @@ public class ModGraph {
 			if (!pre_node.out_nodes.contains(post_node) && !post_node.in_nodes.contains(pre_node)) {
 				pre_node.out_nodes.add(post_node);
 				post_node.in_nodes.add(pre_node);
-				Edge edge = new Edge();
-				edge.up_node = pre_node;
-				edge.down_node = post_node;
-				int pre_index = nodes.indexOf(pre_node.name);
-				int post_index = nodes.indexOf(post_node.name);
-				edge.weight = result[pre_index][post_index];
-				allEdges.add(edge);
 			}
 		}
 	}
