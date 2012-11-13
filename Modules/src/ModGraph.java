@@ -9,12 +9,14 @@ public class ModGraph {
 		for (Pair p:list) {
 			Node pre_node = null;
 			Node post_node = null;
-			for (Node n: allNodes) {
-				if (n.name == p.getPre()) {
-					pre_node = n;
-				}
-				if (n.name == p.getPost()) {
-					post_node = n;
+			if (allNodes != null) {
+				for (Node n: allNodes) {
+					if (n.name == p.getPre()) {
+						pre_node = n;
+					}
+					if (n.name == p.getPost()) {
+						post_node = n;
+					}
 				}
 			}
 			if (pre_node == null) {
@@ -34,5 +36,9 @@ public class ModGraph {
 				allEdges.add(edge);
 			}
 		}
+	}
+	
+	private void mergeCycles() {
+		
 	}
 }
