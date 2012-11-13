@@ -25,12 +25,12 @@ public class ModGraph {
 				post_node = new Node();
 				post_node.name = p.getPost();
 			}
-			pre_node.out_nodes.add(post_node);
-			post_node.in_nodes.add(pre_node);
-			Edge edge = new Edge();
-			edge.up_node = pre_node;
-			edge.down_node = post_node;
-			if (!allEdges.contains(edge)) {
+			if (!pre_node.out_nodes.contains(post_node) && !post_node.in_nodes.contains(pre_node)) {
+				pre_node.out_nodes.add(post_node);
+				post_node.in_nodes.add(pre_node);
+				Edge edge = new Edge();
+				edge.up_node = pre_node;
+				edge.down_node = post_node;
 				allEdges.add(edge);
 			}
 		}
