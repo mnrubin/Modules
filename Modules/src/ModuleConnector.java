@@ -15,6 +15,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
+
 
 public class ModuleConnector {
 
@@ -107,7 +109,7 @@ public class ModuleConnector {
 		System.out.println("lines: "+lines);
 		System.out.println("triangle: "+(((result[0].length*result[0].length)-result[0].length)/2));
 		/* we have list of Pairs */
-
+		ModGraph modgraph = new ModGraph(list);
 		printDotFile(subject, list);
 
 	}//end constructor
