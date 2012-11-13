@@ -27,22 +27,14 @@ public class ModGraph {
 				}
 			}
 			if (pre_node == null) {
-				pre_node = new Node();
-				pre_node.name = p.getPre();
+				pre_node = new Node(p.getPre());
 				allNodes.add(pre_node);
 			}
 			if (post_node == null) {
-				post_node = new Node();
-				post_node.name = p.getPost();
+				post_node = new Node(p.getPost());
 				allNodes.add(post_node);
 			}
-			if (pre_node.out_nodes == null) {
-				pre_node.out_nodes = new LinkedList<Node>();
-			}
-			if (post_node.in_nodes == null) {
-				post_node.in_nodes = new LinkedList<Node>();
-			}
-			if ((pre_node.out_nodes == null || !pre_node.out_nodes.contains(post_node)) && (post_node.in_nodes == null || !post_node.in_nodes.contains(pre_node))) {
+			if (!pre_node.out_nodes.contains(post_node) && !post_node.in_nodes.contains(pre_node)) {
 				pre_node.out_nodes.add(post_node);
 				post_node.in_nodes.add(pre_node);
 			}
