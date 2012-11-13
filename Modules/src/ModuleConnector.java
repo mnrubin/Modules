@@ -109,7 +109,7 @@ public class ModuleConnector {
 		System.out.println("lines: "+lines);
 		System.out.println("triangle: "+(((result[0].length*result[0].length)-result[0].length)/2));
 		/* we have list of Pairs */
-		ModGraph modgraph = new ModGraph(list);
+		ModGraph modgraph = new ModGraph(list, nodes, result);
 		printDotFile(subject, list);
 
 	}//end constructor

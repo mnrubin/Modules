@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -5,7 +6,7 @@ import java.util.List;
 public class ModGraph {
 	List<Node> allNodes;
 	List<Edge> allEdges;
-	public ModGraph(LinkedList<Pair> list) {
+	public ModGraph(LinkedList<Pair> list, ArrayList<String> nodes, int[][] result) {
 		for (Pair p:list) {
 			Node pre_node = null;
 			Node post_node = null;
@@ -33,12 +34,11 @@ public class ModGraph {
 				Edge edge = new Edge();
 				edge.up_node = pre_node;
 				edge.down_node = post_node;
+				int pre_index = nodes.indexOf(pre_node.name);
+				int post_index = nodes.indexOf(post_node.name);
+				edge.weight = result[pre_index][post_index];
 				allEdges.add(edge);
 			}
 		}
-	}
-	
-	private void mergeCycles() {
-		
 	}
 }
