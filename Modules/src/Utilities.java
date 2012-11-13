@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,4 +19,10 @@ public class Utilities {
 		}
 		return Modules;
 	}
+	
+	  public static int getEdgeVal(ArrayList<String> nodes, Node pre_node, Node post_node, int[][] result) {
+		  int pre_index = nodes.indexOf(pre_node.name);
+		  int post_index = nodes.indexOf(post_node.name);
+		  return result[pre_index][post_index];
+	  }
 }
