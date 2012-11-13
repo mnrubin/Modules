@@ -58,8 +58,8 @@ public class ModGraph {
 			List<Node> out_list = n.out_nodes;
 			for(Node outN : out_list)
 			{
-				int pre_index = nodesForLookup.indexOf(n);
-				int post_index = nodesForLookup.indexOf(outN);
+				int pre_index = nodesForLookup.indexOf(n.name);
+				int post_index = nodesForLookup.indexOf(outN.name);
 				if(result[pre_index][post_index] >0)
 				{
 					adjMatrix[pre_index][post_index] = true;
