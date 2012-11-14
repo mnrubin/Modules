@@ -27,14 +27,18 @@ public class PosTagger {
 		        int index = 0;
 		        for(String tag : sample.getTags())
 		        {
-		        	if(tag!="NNS" || tag!="NN" || tag!="NNP")
+		        	if(!tag.equals("NNS") && !tag.equals("NN") && !tag.equals("NNP"))
 		        	{
 		        		modules.remove(whitespaceTokenizerLine[index].trim());
+		        	}
+		        	else {
+		        		System.out.println(tag);
+		        		System.out.println(whitespaceTokenizerLine[index]);
 		        	}
 		        	index++;
 		        }
 		        	
-		        System.out.println(sample.toString());
+		        //System.out.println(sample.toString());
 		
 		        //perfMon.incrementCounter();
 		    }

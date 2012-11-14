@@ -103,13 +103,13 @@ public class ModuleFinder {
 				}
 			}
 			//System.out.println("Intersection: "+modules);
+			FilterMaps.Filter_By_Wiki(modules);
 			PosTagger tagger = new PosTagger();
 			try {
 				tagger.FilterByPos(modules);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			FilterMaps.Filter_By_Wiki(modules);
 			//System.out.println();
 			//System.out.println("Result: "+modules);
 			//logger.log("Results: "+modules.toString());
