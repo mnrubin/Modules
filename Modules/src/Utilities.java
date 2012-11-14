@@ -74,9 +74,8 @@ public class Utilities {
 					fw.println(s);
 				}
 			}
-			
-			temp.renameTo(file);
-			fw.close();
+			File file2 = new File(fn+"2");
+			temp.renameTo(file2);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -32,7 +32,7 @@ public class ModuleConnector {
 		Utilities.blackList(subject+".txt");
 		System.out.println(subject);
 		nodes = new ArrayList<String>();
-		File file = new File(subject+".txt");
+		File file = new File(subject+".txt2");
 		Scanner sc = new Scanner(file);
 		String[] phrases=null;
 		while(sc.hasNextLine())
@@ -113,7 +113,7 @@ public class ModuleConnector {
 		System.out.println("triangle: "+(((result[0].length*result[0].length)-result[0].length)/2));
 		/* we have list of Pairs */
 		ModGraph modgraph = new ModGraph(list, nodes, result);
-		
+		//printDotFile(subject, list);
 		ArrayList<String> cycle;
 		cycle = (ArrayList<String>) graph.TestCycles.getCycle(modgraph.getAdjMatrix(), modgraph.getNodesForLookup());
 		while(cycle != null)
