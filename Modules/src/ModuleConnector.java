@@ -51,7 +51,7 @@ public class ModuleConnector {
 		}
 		//we have strings in array phrases
 
-		while(nodes.size() > 100)
+		while(nodes.size() > 80)
 		{
 			nodes.remove(0);
 		}
@@ -132,6 +132,8 @@ public class ModuleConnector {
 			cycle = (ArrayList<String>) graph.TestCycles.getCycle(modgraph.getAdjMatrix(), modgraph.getNodesForLookup());
 		}
 		
+		//get rid of transitive
+		modgraph.removeTransitive();
 		printDotFile(subject, modgraph);
 
 	}//end constructor

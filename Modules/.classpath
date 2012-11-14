@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="en-pos-maxent.bin"/>
-	<classpathentry kind="lib" path="/Users/Boss/Workspace/PPS/Modules/jsoup-1.6.1.jar"/>
-	<classpathentry kind="lib" path="/Users/Boss/Workspace/PPS/Modules/opennlp-maxent-3.0.1-incubating.jar"/>
-	<classpathentry kind="lib" path="/Users/Boss/Workspace/PPS/Modules/opennlp-tools-1.5.0.jar"/>
+	<classpathentry kind="lib" path="/Users/JohnWoo/PPS/Modules/jsoup-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/Users/JohnWoo/PPS/Modules/opennlp-maxent-3.0.1-incubating.jar"/>
+	<classpathentry kind="lib" path="/Users/JohnWoo/PPS/Modules/opennlp-tools-1.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

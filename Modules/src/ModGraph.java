@@ -112,6 +112,33 @@ public class ModGraph {
 		}
 		
 	}
+	
+	public void removeTransitive(){
+		ArrayList<Node> oneStep;
+		ArrayList<Node> furtherStep;
+		for(Node n: allNodes){
+			furtherStep=new ArrayList<Node>();
+			oneStep = new ArrayList<Node>();
+			oneStep.addAll(n.out_nodes);
+			for(Node m: n.out_nodes){
+				DFS(m,furtherStep);
+			}
+			oneStep.retainAll(furtherStep);
+			for(Node k: oneStep){
+				removeEdge(new Edge(n.name,k.name));
+			}
+		}
+		
+	}
+	
+	public void DFS(Node m, ArrayList<Node> dest){
+		for(Node n:m.out_nodes){
+			dest.add(n);
+			DFS(n,dest);
+		}
+	}
+	
+	
 
 }//end class
 
