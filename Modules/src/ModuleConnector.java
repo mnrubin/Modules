@@ -29,6 +29,7 @@ public class ModuleConnector {
 	 */
 	public ModuleConnector(String subject) throws IOException
 	{
+		Utilities.blackList(subject+".txt");
 		System.out.println(subject);
 		nodes = new ArrayList<String>();
 		File file = new File(subject+".txt");
