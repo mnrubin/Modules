@@ -51,7 +51,7 @@ public class ModuleConnector {
 		}
 		//we have strings in array phrases
 
-		while(nodes.size() > 80)
+		while(nodes.size() > 100)
 		{
 			nodes.remove(0);
 		}
@@ -132,12 +132,12 @@ public class ModuleConnector {
 			cycle = (ArrayList<String>) graph.TestCycles.getCycle(modgraph.getAdjMatrix(), modgraph.getNodesForLookup());
 		}
 		
-		printDotFile(subject, list);
+		printDotFile(subject, modgraph);
 
 	}//end constructor
 
 
-	private void printDotFile(String subject, LinkedList<Pair> list) throws IOException
+	private void printDotFile(String subject, ModGraph modgraph) throws IOException
 	{
 		/*
 		digraph graphname {
@@ -149,10 +149,13 @@ public class ModuleConnector {
 		File dotfile = new File(subj+".dot");
 		PrintWriter pw = new PrintWriter(new FileWriter(dotfile));
 		pw.println("digraph "+subj+" {");
-		for(Pair p : list)
+		for(Node n : modgraph.allNodes)
 		{
-			pw.println("\""+p.getPre().replace(' ', '_')+"\" -> \""+p.getPost().replace(' ', '_')+"\";");
+			for(Node n2 : n.out_nodes)
+			{
+			pw.println("\""+n.name.replace(' ', '_')+"\" -> \""+n2.name.replace(' ', '_')+"\";");
 			pw.flush();
+			}
 		}
 		pw.print("}");
 		pw.flush();
