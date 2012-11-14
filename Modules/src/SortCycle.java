@@ -8,6 +8,7 @@ public class SortCycle  {
 
   public Edge sort(List<String> cycle, ArrayList<String> nodes, int[][] result) {
 	allEdges = new LinkedList<Edge>();
+
     if (cycle == null || cycle.size()==0){
       return null;
     }

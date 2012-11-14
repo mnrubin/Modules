@@ -119,8 +119,7 @@ public class ModuleConnector {
 			SortCycle mySC = new SortCycle();
 			Edge e = mySC.sort(cycle, nodes, result);
 			System.out.println(e);
-			//remove e: TODO
-			
+			modgraph.removeEdge(e);
 			
 			cycle = (ArrayList<String>) graph.TestCycles.getCycle(modgraph.getAdjMatrix(), modgraph.getNodesForLookup());
 		}

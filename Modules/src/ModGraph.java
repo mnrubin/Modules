@@ -67,6 +67,21 @@ public class ModGraph {
 		return nodesForLookup;
 	}
 	
+	public void removeEdge(Edge edge){
+		String pre=edge.pre;
+		String post=edge.post;
+		Node preNode=null;
+		Node postNode=null;
+		for(Node n: allNodes){
+			if(n.name.equals(pre))
+				preNode=n;
+			else if(n.name.equals(post))
+				postNode=n;
+		}
+		preNode.out_nodes.remove(postNode);
+		postNode.in_nodes.remove(preNode);
+	}
+	
 	public static void main(String args[]) throws IOException
 	{
 		ArrayList<String> list = new ArrayList<String>();
