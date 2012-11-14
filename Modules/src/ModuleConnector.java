@@ -29,9 +29,10 @@ public class ModuleConnector {
 	 */
 	public ModuleConnector(String subject) throws IOException
 	{
+		Utilities.blackList(subject+".txt");
 		System.out.println(subject);
 		nodes = new ArrayList<String>();
-		File file = new File(subject+".txt");
+		File file = new File(subject+".txt2");
 		Scanner sc = new Scanner(file);
 		String[] phrases=null;
 		while(sc.hasNextLine())
@@ -50,7 +51,13 @@ public class ModuleConnector {
 		}
 		//we have strings in array phrases
 
+		while(nodes.size() > 80)
+		{
+			nodes.remove(0);
+		}
+		
 		int[][] result=new int[nodes.size()][nodes.size()];
+		
 		System.out.println("Size of nodes: "+nodes.size());
 		for(int i=0;i<nodes.size();++i){
 			String wiki=lookUpOnWiki(nodes.get(i));
@@ -102,14 +109,14 @@ public class ModuleConnector {
 		}
 		
 		int nonzerocount=0;
-		for(int[] i:result){
+		/*for(int[] i:result){
 			for(int j:i)
 				if(j!=0)
 					++nonzerocount;
 		}
 		System.out.println("Non-zero count: "+nonzerocount);
 		System.out.println("lines: "+lines);
-		System.out.println("triangle: "+(((result[0].length*result[0].length)-result[0].length)/2));
+		System.out.println("triangle: "+(((result[0].length*result[0].length)-result[0].length)/2));*/
 		/* we have list of Pairs */
 		ModGraph modgraph = new ModGraph(list, nodes, result);
 		

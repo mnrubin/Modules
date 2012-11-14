@@ -76,6 +76,8 @@ public class ElementaryCyclesSearch {
 		int s = 0;
 
 		while (true) {
+			if(this.cycles.size()!=0)
+				break;
 			SCCResult sccResult = sccs.getAdjacencyList(s);
 			if (sccResult != null && sccResult.getAdjList() != null) {
 				Vector[] scc = sccResult.getAdjList();
