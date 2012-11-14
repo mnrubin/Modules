@@ -37,7 +37,7 @@ public class ModuleConnector {
 		while(sc.hasNextLine())
 		{
 			String line = sc.nextLine();
-			if(line.contains("{}"))
+			/*if(line.contains("{}"))
 			{
 				continue;
 			}
@@ -45,7 +45,8 @@ public class ModuleConnector {
 			phrases=phrase.split("( *=[0-9]+, )|( *=[0-9]+)"); //now we have each string separately
 			System.out.println(Arrays.toString(phrases));
 			for(String s:phrases)
-				nodes.add(s.trim());
+				nodes.add(s.trim());*/
+			nodes.add(line.trim());
 		}
 		//we have strings in array phrases
 
