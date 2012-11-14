@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class SortCycle  {
@@ -6,7 +7,7 @@ public class SortCycle  {
   private List<Edge> allEdges;
 
   public Edge sort(List<String> cycle, ArrayList<String> nodes, int[][] result) {
-    // Check for empty or null array
+	allEdges = new LinkedList<Edge>();
     if (cycle == null || cycle.size()==0){
       return null;
     }
