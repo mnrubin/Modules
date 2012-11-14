@@ -29,6 +29,7 @@ public class ModuleConnector {
 	 */
 	public ModuleConnector(String subject) throws IOException
 	{
+		System.out.println(subject);
 		nodes = new ArrayList<String>();
 		File file = new File(subject+".txt");
 		Scanner sc = new Scanner(file);
@@ -110,6 +111,20 @@ public class ModuleConnector {
 		System.out.println("triangle: "+(((result[0].length*result[0].length)-result[0].length)/2));
 		/* we have list of Pairs */
 		ModGraph modgraph = new ModGraph(list, nodes, result);
+		
+		ArrayList<String> cycle;
+		cycle = (ArrayList<String>) graph.TestCycles.getCycle(modgraph.getAdjMatrix(), modgraph.getNodesForLookup());
+		while(cycle != null)
+		{
+			SortCycle mySC = new SortCycle();
+			Edge e = mySC.sort(cycle, nodes, result);
+			System.out.println(e);
+			//remove e: TODO
+			
+			
+			cycle = (ArrayList<String>) graph.TestCycles.getCycle(modgraph.getAdjMatrix(), modgraph.getNodesForLookup());
+		}
+		
 		printDotFile(subject, list);
 
 	}//end constructor
@@ -162,7 +177,7 @@ public class ModuleConnector {
 
 	public static void main(String args[]) throws IOException
 	{
-		ModuleConnector mc = new ModuleConnector("Mathematics");
+		ModuleConnector mc = new ModuleConnector(args[0]);
 	}
 
 }//end class
